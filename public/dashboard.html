@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlyDreamAir Loyalty Program - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h2>Welcome to Your Loyalty Dashboard</h2>
+
+<p id="points">Loading your points...</p>
+
+<h3>🚀 How to Earn More Points:</h3>
+<ul>
+    <li>Book any FlyDreamAir flight (1000 points per booking)</li>
+    <li>Invite a friend (500 points per invite)</li>
+    <li>Complete your profile information (200 points one-time)</li>
+</ul>
+
+<form action="/loyalty/earn" method="POST">
+    <button type="submit">🎯 Earn 100 Points Now</button>
+</form>
+
+<h3>🎁 Redeemable Rewards:</h3>
+<div id="items">
+    <form action="/cart/add-to-cart" method="POST">
+        <input type="hidden" name="item" value="Headphones (500 pts)">
+        <button type="submit">Redeem Headphones - 500 Points</button>
+    </form>
+    <form action="/cart/add-to-cart" method="POST">
+        <input type="hidden" name="item" value="Flight Upgrade (1000 pts)">
+        <button type="submit">Redeem Flight Upgrade - 1000 Points</button>
+    </form>
+    <form action="/cart/add-to-cart" method="POST">
+        <input type="hidden" name="item" value="Gift Card (300 pts)">
+        <button type="submit">Redeem Gift Card - 300 Points</button>
+    </form>
+</div>
+
+<br>
+<form action="/cart/view" method="GET">
+    <button type="submit">🛒 Proceed to Cart</button>
+</form>
+
+<br>
+<form action="/auth/logout" method="POST">
+    <button type="submit">🚪 Logout</button>
+</form>
+
+<script>
+fetch('/loyalty/points')
+  .then(response => response.json())
+  .then(data => {
+      document.getElementById('points').innerText = "You currently have: " + data.points + " points.";
+  });
+</script>
+</body>
+</html>
